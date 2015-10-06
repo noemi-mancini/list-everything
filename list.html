@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="listEverything">
 <head>
     <title>List</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -14,11 +14,11 @@
         </div>
     </header>
     
-    <section class="main">
+    <section ng-controller="ListController as listCtrl" class="main">
         <div class="container">
-            <h2>Add your first item to the list.</h2>
-            <div class="row">
-                <div class="col-xs-6"><span class="glyphicon glyphicon-move"></span> </div>
+            <h2>{{listCtrl.callToAction}}</h2>
+            <div ng-repeat="item in listCtrl.list" class="row">
+                <div class="col-xs-6"><span class="glyphicon glyphicon-move"></span> {{item.title}}</div>
                 <div class="col-xs-6">
                     <button class="btn">
                         <span class="glyphicon glyphicon-remove"></span> Delete
@@ -26,11 +26,11 @@
                 </div>
             </div>
             
-            <form name="addItemForm" class="form-inline">
+            <form name="addItemForm" ng-submit="listCtrl.addItem(index)" class="form-inline">
                 <div class="form-group">
-                    <input type="text" placeholder="add an item">
+                    <input ng-model="listCtrl.item.title" type="text" placeholder="add an item">
                 </div>
-                <button class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="submit" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
             </form>
 
         </div>
